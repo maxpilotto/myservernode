@@ -1,0 +1,25 @@
+{
+  "name": "com.maxpilotto.myservernode",
+  "version": "1.0.0",
+  "description": "NodeJS server example",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxpilotto/myservernode.git"
+  },
+  "author": "maxpilotto.com",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/maxpilotto/myservernode/issues"
+  },
+  "homepage": "https://github.com/maxpilotto/myservernode#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongodb": "^3.2.4",
+    "nodemon": "^1.19.0"
+  }
+}
