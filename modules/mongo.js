@@ -12,17 +12,9 @@ const client = new mongo(uri, {
 	useNewUrlParser: true
 })
 
-let db
-
 module.exports = {
-	connect: function(onConnect){
-		client.connect(e => {
-			db = client.db(dbName)
-
-			onConnect()
-		})
-	},
-	get: function(){
-		return db
+	client,
+	db : function(){
+		return client.db(dbName)
 	}
 }
