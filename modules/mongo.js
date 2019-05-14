@@ -13,8 +13,15 @@ const client = new mongo(uri, {
 })
 
 module.exports = {
-	client,
-	db : function(){
+	db: function () {
 		return client.db(dbName)
+	},
+	connect: function (onConnect) {
+		client.connect((e) => {
+			onConnect(e)
+		})
+	},
+	collection: function(name){
+		return client.db(dbName).collection(name)
 	}
 }
