@@ -1,7 +1,7 @@
 {
   "name": "com.maxpilotto.myservernode",
   "version": "1.0.0",
-  "description": "NodeJS server example",
+  "description": "NodeJS server exam",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
