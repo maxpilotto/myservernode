@@ -5,14 +5,23 @@ npm start
 ```
 
 # Routes
-## `/api/v1/info`
+## GET `/api/v1/info`
 Shows infos about the v1 API 
 
-## `/api/v1/todos/:api_key`
+## GET `/api/v1/todos/:api_key`
 Shows all the todos for that API key
 
-## `/api/v1/todos/:api_key/:id`
+## GET `/api/v1/todos/:api_key/:id`
 Shows the todo for that API key and that id
+
+
+## POST `/api/v1/todos/`
+Update {
+    _id: id,
+    title: "title",
+    description: "description"
+}
+
 
 # API keys
 + 12345abcdef
