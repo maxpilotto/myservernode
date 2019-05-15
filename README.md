@@ -19,7 +19,7 @@ Shows infos about the V2 API
 
 ## POST `/api/v1/todos/`
 #### Update 
-```json
+```js
 {
     _id: id,
     title: "title",
@@ -30,7 +30,7 @@ Shows infos about the V2 API
 ```
 
 #### Create
-```json
+```js
 {
     title: "title",
     description: "description",
@@ -40,7 +40,7 @@ Shows infos about the V2 API
 ```
 
 #### Delete
-```json
+```js
 {
     _id: id
     api: "api_key",
