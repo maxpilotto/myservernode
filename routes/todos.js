@@ -3,13 +3,13 @@ const mongo = require('../modules/mongo')
 const util = require('../modules/util')
 
 router.get('/:api', (q, a) => {
-    let query = {
+    const query = {
         api: q.params.api
     }
 
     mongo.collection('todos').find(query).toArray((e, result) => {
         if (util.isEmpty(result)) {
-            a.send('404')
+            a.send(util.E_404)
         } else {
             a.send(result)
         }
@@ -26,7 +26,7 @@ router.get('/:api/:id', (q, a) => {
 
     mongo.collection('todos').find(query).toArray((e, result) => {
         if (util.isEmpty(result)) {
-            a.send('404')
+            a.send(util.E_404)
         } else {
             a.send(result)
         }
@@ -117,18 +117,6 @@ router.post('/', (q, a) => {
                 break;
         }
     }
-
-    
-
-    /* console.log(nome, cognome, occupazione, tel)
-    if (nome) {
-      status.code = 'ok'
-      status.message = `Benvenuto ${nome}`
-    } else {
-      status.code = 'error'
-      status.message = 'nome non valido'
-      status.campo = 'nome'
-    } */
 
     a.send(status)
 })
