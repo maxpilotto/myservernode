@@ -1,9 +1,14 @@
+require('dotenv').config()
+
 const v1 = require('./versions/v1')
 const v2 = require('./versions/v2')
 const express = require('express')
 const mongo = require('./modules/mongo')
 const port = process.argv[2] || 2223
 const app = express()
+
+console.log(process.env.DB_USER)
+console.log(process.env.DB_SECRET)
 
 app.use(express.urlencoded())
 

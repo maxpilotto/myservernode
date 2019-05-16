@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/maxpilotto/myservernode#readme",
   "dependencies": {
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "mongodb": "^3.2.4",
     "nodemon": "^1.19.0"
