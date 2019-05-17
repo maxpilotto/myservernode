@@ -7,9 +7,6 @@ const mongo = require('./modules/mongo')
 const port = process.argv[2] || 2223
 const app = express()
 
-console.log(process.env.DB_USER)
-console.log(process.env.DB_SECRET)
-
 app.use(express.urlencoded())
 
 app.use('/api/v1', v1)
