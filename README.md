@@ -42,9 +42,20 @@ Shows infos about the V2 API
 #### Delete
 ```js
 {
-    _id: id
+    _id: id,
     api: "api_key",
     method: "delete"
+}
+```
+
+#### Query
+```js
+{
+    _id: id,
+    api: "api_key",
+    method: "delete",
+    title: "title",
+    description: "description"
 }
 ```
 
