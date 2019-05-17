@@ -34,10 +34,6 @@ router.get('/:api/:id', (q, a) => {
 })
 
 router.post('/', (q, a) => {
-    const status = {
-        code: 200,
-        message: 'Done'
-    }
     const {
         method,
         _id,
@@ -45,21 +41,25 @@ router.post('/', (q, a) => {
         description,
         api
     } = q.body
+    let status = {
+        code: 200,
+        message: 'Done'
+    }
 
-    if (!method){
+    if (!method) {
         status.code = 400
         status.message = 'No method provided'
-        status.methods = ['create','update','delete']
-    }else if (!api){
+        status.methods = ['create', 'update', 'delete', 'query']
+    } else if (!api) {
         status.code = 403
         status.message = 'No API key provided'
-    }else{
-        switch (method){
+    } else {
+        switch (method) {
             case 'create':
-                if (!title){
+                if (!title) {
                     status.code = 400
                     status.message = 'No title provided'
-                }else{
+                } else {
                     let record = {
                         title: title,
                         description: description,
@@ -67,19 +67,20 @@ router.post('/', (q, a) => {
                     }
 
                     mongo.collection('todos').insertOne(record, e => {
-                        if (e){
+                        if (e) {
                             status.code = 400
                             status.message = e
                         }
+                        a.send(status)
                     })
                 }
                 break;
-    
+
             case 'update':
-                if (!_id){
+                if (!_id) {
                     status.code = 400
                     status.message = 'No id provided'
-                }else{
+                } else {
                     let record = {
                         title: title,
                         description: description,
@@ -89,36 +90,64 @@ router.post('/', (q, a) => {
                         _id: mongo.ObjectId(_id)
                     }
 
-                    mongo.collection('todos').updateOne(query,{$set: record}, e => {
-                        if (e){
+                    mongo.collection('todos').updateOne(query, {
+                        $set: record
+                    }, e => {
+                        if (e) {
                             status.code = 400
                             status.message = e
                         }
+                        a.send(status)
                     })
                 }
                 break;
-    
+
             case 'delete':
-                if (!_id){
+                if (!_id) {
                     status.code = 400
                     status.message = 'No id provided'
-                }else{
+                } else {
                     let query = {
                         _id: mongo.ObjectId(_id)
                     }
 
                     mongo.collection('todos').deleteOne(query, e => {
-                        if (e){
+                        if (e) {
                             status.code = 400
                             status.message = e
                         }
+                        a.send(status)
                     })
                 }
                 break;
+
+            case 'query':
+                const query = {
+                    api: api,
+                    _id: mongo.ObjectId(_id),
+                    title: title,
+                    description: description
+                }
+
+                console.log('Am here')
+                console.log(query)
+
+                mongo.collection('todos').find(query).toArray((e, result) => {
+                    if (e){
+                        status.code = 400
+                        status.message = e
+                    }else if (util.isEmpty(result)){
+                        status = util.E_404
+                    }else{
+                        status.code = 200
+                        status.message = result
+                    }
+
+                    a.send(status)
+                })
+                break;
         }
     }
-
-    a.send(status)
 })
 
 module.exports = router
